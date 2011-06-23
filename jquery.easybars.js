@@ -1,7 +1,10 @@
 /**
  * jQuery easyBars plugin
  *
- * @author James Fuller <jblotus@gmail.com>
+ * @author James Fuller <jblotus@gmail.com
+ */
+/**
+ * jQuery Simple Static Progress Bars by James Fuller <james@time4learning.com>
  */
 (function($) {
 
@@ -38,7 +41,15 @@
 
           var $inner_text = $('<div>').attr('class', 'inner-text');
 
-          $inner_text.append($el.children()).css({
+          /**
+           * If we don't specify a label, just use the contents of the initial element
+           */
+          var $label = $el.children('.label');
+          if (!$label.length) {
+            $label = $el.children();
+          }
+
+          $inner_text.append($label).css({
             'position' : 'absolute',
             'width'  :  width,
             'height' :  height
