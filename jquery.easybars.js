@@ -45,7 +45,6 @@
           });
 
           $container.append($inner_bar.append($inner_text));
-          console.log($container);
           $el.replaceWith($container);
         }
       });
