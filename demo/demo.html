@@ -19,14 +19,16 @@
     </div>
 
     <pre class="src">
-&lt;div class=&quot;easybars&quot;&gt;
-  &lt;span class=&quot;label&quot;&gt;1 of 3&lt;/span&gt;
-  &lt;span class=&quot;current&quot;&gt;1&lt;/span&gt;
-  &lt;span class=&quot;total&quot;&gt;3&lt;/span&gt;
-&lt;/div&gt;
+      &lt;div class=&quot;easybars&quot;&gt;
+        &lt;span class=&quot;label&quot;&gt;1 of 3&lt;/span&gt;
+        &lt;span class=&quot;current&quot;&gt;1&lt;/span&gt;
+        &lt;span class=&quot;total&quot;&gt;3&lt;/span&gt;
+      &lt;/div&gt;
     </pre>
 
-    <pre class="code">$('.easybars').easyBars();</pre>
+    <pre class="code">
+      $('.easybars').easyBars();
+     </pre>
   </div>
 
   <div class="example">
@@ -46,22 +48,24 @@
     </div>
 
     <pre class="src">
-&lt;div class=&quot;easybars-multi&quot;&gt;
-  &lt;span class=&quot;label&quot;&gt;50% complete&lt;/span&gt;
-  &lt;span class=&quot;current&quot;&gt;50&lt;/span&gt;
-  &lt;span class=&quot;total&quot;&gt;100&lt;/span&gt;
-&lt;/div&gt;
+      &lt;div class=&quot;easybars-multi&quot;&gt;
+        &lt;span class=&quot;label&quot;&gt;50% complete&lt;/span&gt;
+        &lt;span class=&quot;current&quot;&gt;50&lt;/span&gt;
+        &lt;span class=&quot;total&quot;&gt;100&lt;/span&gt;
+      &lt;/div&gt;
 
-&lt;div class=&quot;easybars-multi&quot;&gt;
-  &lt;span class=&quot;label&quot;&gt;150 of 300&lt;/span&gt;
-  &lt;span class=&quot;current&quot;&gt;150&lt;/span&gt;
-  &lt;span class=&quot;total&quot;&gt;300&lt;/span&gt;
-&lt;/div&gt;
+      &lt;div class=&quot;easybars-multi&quot;&gt;
+        &lt;span class=&quot;label&quot;&gt;150 of 300&lt;/span&gt;
+        &lt;span class=&quot;current&quot;&gt;150&lt;/span&gt;
+        &lt;span class=&quot;total&quot;&gt;300&lt;/span&gt;
+      &lt;/div&gt;
     </pre>
 
-    <pre class="code">$('.easybars-multi').easyBars();</pre>
+    <pre class="code">
+      $('.easybars-multi').easyBars();
+    </pre>
   </div>
-  
+
     <div class="example">
 
     <p>You can easily override the default color of the bar, label and background by suppying
@@ -74,18 +78,103 @@
     </div>
 
     <pre class="src">
-&lt;div class=&quot;easybars-colorful&quot;&gt;
-  &lt;span class=&quot;label&quot;&gt;17 alligators ate 32 children&lt;/span&gt;
-  &lt;span class=&quot;current&quot;&gt;17&lt;/span&gt;
-  &lt;span class=&quot;total&quot;&gt;32&lt;/span&gt;
-&lt;/div&gt;
+      &lt;div class=&quot;easybars-colorful&quot;&gt;
+        &lt;span class=&quot;label&quot;&gt;17 alligators ate 32 children&lt;/span&gt;
+        &lt;span class=&quot;current&quot;&gt;17&lt;/span&gt;
+        &lt;span class=&quot;total&quot;&gt;32&lt;/span&gt;
+      &lt;/div&gt;
     </pre>
 
     <pre class="code">
-$('.easybars-colorful').easyBars({ 
-  'backgroundColor' : '#ccc', 'barColor' : '#ff0000', 'labelColor' : '#eee'
-});
-</pre>
+      $('.easybars-colorful').easyBars({
+        'backgroundColor' : '#ccc', 'barColor' : '#ff0000', 'labelColor' : '#eee'
+      });
+    </pre>
+
+        <div class="example">
+
+    <p>You can also provide for different styles based on percentage by supplied an object literal instead of
+    a string value. The object literal is in the format {'percentage' : 'value'}': </p>
+
+    <div class="easybars-multicolor">
+      <span class="label">10%</span>
+      <span class="current">10</span>
+      <span class="total">100</span>
+    </div>
+
+    <div class="easybars-multicolor">
+      <span class="label">30%</span>
+      <span class="current">30</span>
+      <span class="total">100</span>
+    </div>
+
+    <div class="easybars-multicolor">
+      <span class="label">50%</span>
+      <span class="current">50</span>
+      <span class="total">100</span>
+    </div>
+
+    <div class="easybars-multicolor">
+      <span class="label">76%</span>
+      <span class="current">76</span>
+      <span class="total">100</span>
+    </div>
+
+    <div class="easybars-multicolor">
+      <span class="label">100%</span>
+      <span class="current">100</span>
+      <span class="total">100</span>
+    </div>
+
+    <pre class="src">
+    &lt;div class=&quot;easybars-multicolor&quot;&gt;
+      &lt;span class=&quot;label&quot;&gt;10%&lt;/span&gt;
+      &lt;span class=&quot;current&quot;&gt;10&lt;/span&gt;
+      &lt;span class=&quot;total&quot;&gt;100&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;easybars-multicolor&quot;&gt;
+      &lt;span class=&quot;label&quot;&gt;30%&lt;/span&gt;
+      &lt;span class=&quot;current&quot;&gt;30&lt;/span&gt;
+      &lt;span class=&quot;total&quot;&gt;100&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;easybars-multicolor&quot;&gt;
+      &lt;span class=&quot;label&quot;&gt;50%&lt;/span&gt;
+      &lt;span class=&quot;current&quot;&gt;50&lt;/span&gt;
+      &lt;span class=&quot;total&quot;&gt;100&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;easybars-multicolor&quot;&gt;
+      &lt;span class=&quot;label&quot;&gt;76%&lt;/span&gt;
+      &lt;span class=&quot;current&quot;&gt;76&lt;/span&gt;
+      &lt;span class=&quot;total&quot;&gt;100&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;easybars-multicolor&quot;&gt;
+      &lt;span class=&quot;label&quot;&gt;100%&lt;/span&gt;
+      &lt;span class=&quot;current&quot;&gt;100&lt;/span&gt;
+      &lt;span class=&quot;total&quot;&gt;100&lt;/span&gt;
+    &lt;/div&gt;
+    </pre>
+
+    <pre class="code">
+    $('.easybars-multicolor').easyBars({
+      'backgroundColor' : '#ccc',
+      'labelColor' : {
+        '0'  : 'white',
+        '44' : 'orange',
+        '100': 'turquoise'
+      },
+      'barColor' : {
+        '0'  : 'red',
+        '25' : 'orange',
+        '50' : 'yellow',
+        '75' : 'purple',
+        '100': 'green'
+      }
+    });
+    </pre>
   </div>
 </body>
 </html>

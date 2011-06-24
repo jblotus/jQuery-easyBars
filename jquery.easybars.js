@@ -11,9 +11,28 @@
   $.fn.extend({
     easyBars: function(supplied_options) {
 
-    return this.each(function(i, e) {
+      //this will allow us to take return different values based on a percentage hash
+      var getAttrFromPercentagObject = function(percentage, obj) {
+
+        if (percentage && obj) {
+          var lastValid;
+
+          for (i = 0; i < 101; i++) {
+
+            if (obj[i]) {
+              lastValid = obj[i];
+            }
+
+            if(i >= percentage) {
+              return lastValid;
+            }
+          }
+        }
+      };
+
+      return this.each(function(i, e) {
         $el = $(e);
-        
+
         var options = $.extend({
           current : parseInt($el.find('.current').text()),
           total   : parseInt($el.find('.total').text()),
@@ -23,7 +42,18 @@
           barColor : '#50A6C2',
           labelColor: $el.css('color')
         }, supplied_options || {});
-        
+
+        //calculate the width for the inner bar
+        options.barScale = options.current / options.total;
+        options.barWidth = Math.round(options.width * (options.barScale), 0 , 2);
+
+        //calculate percentage based options hashes
+        $.each(options, function(ii, vv) {
+          if (typeof vv === 'object') {
+            options[ii] = getAttrFromPercentagObject(options.barScale * 100, options[ii]);
+          }
+        });
+
         if (options.current !== 'NaN' && options.total !== 'NaN') {
 
           var $container = $('<div>').attr('class', 'easybars').css({
@@ -37,7 +67,7 @@
           });
 
           var $inner_bar  = $('<div>').attr('class', 'inner-bar').css({
-            'width'  :  Math.round(options.width * (options.current / options.total), 0 , 2),
+            'width'  :  options.barWidth,
             'height' :  options.height,
             'background-color': options.barColor,
             'position' : 'absolute'
@@ -51,7 +81,7 @@
           var $label = $el.children('.label').css({
             'color'  :  options.labelColor
           });
-          
+
           if (!$label.length) {
             $label = $el.children();
           }
