@@ -1,4 +1,12 @@
 .example {
-  width: 400px;
+  width: 600px;
   margin: 0 auto;
+}
+
+.example .src {
+  background-color: #ddd;
+}
+
+.example .code {
+  background-color: #eee;
 }

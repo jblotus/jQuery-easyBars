@@ -9,33 +9,37 @@
 (function($) {
 
   $.fn.extend({
-    easyBars: function(options) {
+    easyBars: function(supplied_options) {
 
-      var self = this;
-
-      $(self).each(function(i, e) {
+    return this.each(function(i, e) {
         $el = $(e);
-
-        var current = parseInt($el.find('.current').text());
-        var total   = parseInt($el.find('.total').text());
-        var height  = $el.height();
-        var width   = $el.width();
-
-        if (current !== 'NaN' && total !== 'NaN') {
+        
+        var options = $.extend({
+          current : parseInt($el.find('.current').text()),
+          total   : parseInt($el.find('.total').text()),
+          height  : $el.height(),
+          width   : $el.width(),
+          backgroundColor: $el.css('background-color'),
+          barColor : '#50A6C2',
+          labelColor: $el.css('color')
+        }, supplied_options || {});
+        
+        if (options.current !== 'NaN' && options.total !== 'NaN') {
 
           var $container = $('<div>').attr('class', 'easybars').css({
-            'height': height,
-            'width': width,
+            'height': options.height,
+            'width': options.width,
             'border' : '1px solid #ccc',
             'position' : 'relative',
             'margin': '5px auto',
-            'text-align': 'center'
+            'text-align': 'center',
+            'background-color' : options.backgroundColor
           });
 
           var $inner_bar  = $('<div>').attr('class', 'inner-bar').css({
-            'width'  :  Math.round(width * (current / total), 0 , 2),
-            'height' :  height,
-            'background-color': '#FF9933',
+            'width'  :  Math.round(options.width * (options.current / options.total), 0 , 2),
+            'height' :  options.height,
+            'background-color': options.barColor,
             'position' : 'absolute'
           });
 
@@ -44,23 +48,24 @@
           /**
            * If we don't specify a label, just use the contents of the initial element
            */
-          var $label = $el.children('.label');
+          var $label = $el.children('.label').css({
+            'color'  :  options.labelColor
+          });
+          
           if (!$label.length) {
             $label = $el.children();
           }
 
           $inner_text.append($label).css({
             'position' : 'absolute',
-            'width'  :  width,
-            'height' :  height
+            'width'  :  options.width,
+            'height' :  options.height
           });
 
           $container.append($inner_bar.append($inner_text));
           $el.replaceWith($container);
         }
       });
-
-      return self;
     }
   });
 })(jQuery);

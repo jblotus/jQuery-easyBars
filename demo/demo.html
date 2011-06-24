@@ -26,7 +26,7 @@
 &lt;/div&gt;
     </pre>
 
-    <pre class="code">$('.easybars').easyBars()</pre>
+    <pre class="code">$('.easybars').easyBars();</pre>
   </div>
 
   <div class="example">
@@ -59,7 +59,33 @@
 &lt;/div&gt;
     </pre>
 
-    <pre class="code">$('.easybars-multi').easyBars()</pre>
+    <pre class="code">$('.easybars-multi').easyBars();</pre>
+  </div>
+  
+    <div class="example">
+
+    <p>You can easily override the default color of the bar, label and background by suppying
+     easyBars with some options: </p>
+
+    <div class="easybars-colorful">
+      <span class="label">17 alligators ate 32 children</span>
+      <span class="current">17</span>
+      <span class="total">32</span>
+    </div>
+
+    <pre class="src">
+&lt;div class=&quot;easybars-colorful&quot;&gt;
+  &lt;span class=&quot;label&quot;&gt;17 alligators ate 32 children&lt;/span&gt;
+  &lt;span class=&quot;current&quot;&gt;17&lt;/span&gt;
+  &lt;span class=&quot;total&quot;&gt;32&lt;/span&gt;
+&lt;/div&gt;
+    </pre>
+
+    <pre class="code">
+$('.easybars-colorful').easyBars({ 
+  'backgroundColor' : '#ccc', 'barColor' : '#ff0000', 'labelColor' : '#eee'
+});
+</pre>
   </div>
 </body>
 </html>
