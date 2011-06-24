@@ -12,7 +12,7 @@
     easyBars: function(supplied_options) {
 
       //this will allow us to take return different values based on a percentage hash
-      var getAttrFromPercentagObject = function(percentage, obj) {
+      var getAttrFromPercentageObject = function(percentage, obj) {
 
         if (percentage && obj) {
           var lastValid;
@@ -50,7 +50,7 @@
         //calculate percentage based options hashes
         $.each(options, function(ii, vv) {
           if (typeof vv === 'object') {
-            options[ii] = getAttrFromPercentagObject(options.barScale * 100, options[ii]);
+            options[ii] = getAttrFromPercentageObject(options.barScale * 100, options[ii]);
           }
         });
 
