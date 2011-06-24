@@ -9,13 +9,57 @@
 </head>
 <body>
   <div class="example">
+
+    <p>easyBars automatically takes on the width and height of the supplied element</p>
+
     <div class="easybars">
       <span class="label">1 of 3</span>
       <span class="current">1</span>
       <span class="total">3</span>
     </div>
 
-    <pre>$(element).easyBars()</pre>
+    <pre class="src">
+&lt;div class=&quot;easybars&quot;&gt;
+  &lt;span class=&quot;label&quot;&gt;1 of 3&lt;/span&gt;
+  &lt;span class=&quot;current&quot;&gt;1&lt;/span&gt;
+  &lt;span class=&quot;total&quot;&gt;3&lt;/span&gt;
+&lt;/div&gt;
+    </pre>
+
+    <pre class="code">$('.easybars').easyBars()</pre>
+  </div>
+
+  <div class="example">
+
+    <p>easyBars will by default transform every element that matches the supplied selector</p>
+
+    <div class="easybars-multi">
+      <span class="label">70% complete</span>
+      <span class="current">70</span>
+      <span class="total">100</span>
+    </div>
+
+    <div class="easybars-multi">
+      <span class="label">150 of 300</span>
+      <span class="current">150</span>
+      <span class="total">300</span>
+    </div>
+
+    <pre class="src">
+&lt;div class=&quot;easybars-multi&quot;&gt;
+  &lt;span class=&quot;label&quot;&gt;50% complete&lt;/span&gt;
+  &lt;span class=&quot;current&quot;&gt;50&lt;/span&gt;
+  &lt;span class=&quot;total&quot;&gt;100&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;easybars-multi&quot;&gt;
+  &lt;span class=&quot;label&quot;&gt;150 of 300&lt;/span&gt;
+  &lt;span class=&quot;current&quot;&gt;150&lt;/span&gt;
+  &lt;span class=&quot;total&quot;&gt;300&lt;/span&gt;
+&lt;/div&gt;
+    </pre>
+
+    <pre class="code">$('.easybars-multi').easyBars()</pre>
   </div>
 </body>
 </html>
