@@ -1,7 +1,7 @@
 /**
  * jQuery easyBars plugin
  *
- * @author James Fuller <jblotus@gmail.com
+ * @author James Fuller <jblotus@gmail.com>
  */
 /**
  * jQuery Simple Static Progress Bars by James Fuller <james@time4learning.com>
