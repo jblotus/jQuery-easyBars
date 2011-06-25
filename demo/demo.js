@@ -27,5 +27,8 @@
         '100': 'green'
       }
     });
+
+    //example 5
+    $('.easybars-html5-data-attr').easyBars();
   });
 })(jQuery);
