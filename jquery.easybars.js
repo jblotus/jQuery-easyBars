@@ -33,15 +33,19 @@
       return this.each(function(i, e) {
         $el = $(e);
 
+        var data = $el.data();
+        data = $.extend(data, supplied_options || {});
+
         var options = $.extend({
-          current : parseInt($el.find('.current').text()),
-          total   : parseInt($el.find('.total').text()),
-          height  : $el.height(),
-          width   : $el.width(),
-          backgroundColor: $el.css('background-color'),
-          barColor : '#50A6C2',
-          labelColor: $el.css('color')
-        }, supplied_options || {});
+          current         : parseInt($el.find('.current').text()),
+          total           : parseInt($el.find('.total').text()),
+          height          : $el.height(),
+          width           : $el.width(),
+          backgroundColor : $el.css('background-color'),
+          barColor        : '#50A6C2',
+          labelColor      : $el.css('color')
+        }, data);
+
 
         //calculate the width for the inner bar
         options.barScale = options.current / options.total;
@@ -78,18 +82,29 @@
           /**
            * If we don't specify a label, just use the contents of the initial element
            */
-          var $label = $el.children('.label').css({
-            'color'  :  options.labelColor
-          });
+          //use supplied HTML5 data-label or supplied { 'label' } value
+          if (options.label) {
+            $label = $('<span>').attr('class', 'label').text(options.label);
+          } else {
+            //fall back to an element with the class label inside the parent
+            $label = $el.children('.label');
 
-          if (!$label.length) {
-            $label = $el.children();
+            if (!$label.length) {
+              //when in doubt fall back to all child elements
+              $label = $el.children();
+            }
           }
+
+          $label.css({
+            'color'  :  options.labelColor,
+            'vertical-align' : 'middle'
+          });
 
           $inner_text.append($label).css({
             'position' : 'absolute',
             'width'  :  options.width,
-            'height' :  options.height
+            'height' :  options.height,
+            'line-height' : options.height + 'px' //support centered text label
           });
 
           $container.append($inner_bar.append($inner_text));

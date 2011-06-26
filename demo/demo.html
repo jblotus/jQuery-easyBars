@@ -8,11 +8,17 @@
   <script type="text/javascript" src="demo.js"></script>
 </head>
 <body>
-  <div class="example">
+
+  <section>
+    Note the when supplying custom width/height, values must be in px. Will address this in future release.
+    Best practice would be to set a height and width on the actual element(s).
+  </section>
+
+  <section class="example">
 
     <p>easyBars automatically takes on the width and height of the supplied element</p>
 
-    <div class="easybars">
+  <div class="easybars">
       <span class="label">1 of 3</span>
       <span class="current">1</span>
       <span class="total">3</span>
@@ -29,9 +35,9 @@
     <pre class="code">
       $('.easybars').easyBars();
      </pre>
-  </div>
+  </section>
 
-  <div class="example">
+  <section class="example">
 
     <p>easyBars will by default transform every element that matches the supplied selector</p>
 
@@ -64,9 +70,9 @@
     <pre class="code">
       $('.easybars-multi').easyBars();
     </pre>
-  </div>
+  </section>
 
-    <div class="example">
+  <section class="example">
 
     <p>You can easily override the default color of the bar, label and background by suppying
      easyBars with some options: </p>
@@ -91,7 +97,7 @@
       });
     </pre>
 
-        <div class="example">
+  <section class="example">
 
     <p>You can also provide for different styles based on percentage by supplied an object literal instead of
     a string value. The object literal is in the format {'percentage' : 'value'}': </p>
@@ -175,6 +181,37 @@
       }
     });
     </pre>
-  </div>
+  </section>
+
+  <section class="example">
+
+    <p>Values can also be supplied using HTML5 data attributes</p>
+
+    <div class="easybars-html5-data-attr"
+         data-height="50"
+         data-width="400"
+         data-background-color="#eee"
+         data-bar-color="#ff9900"
+         data-label="Made with HTML5 data attributes"
+         data-current="25"
+         data-total="100">
+    </div>
+
+    <pre class="src">
+    &lt;div class=&quot;easybars-html5-data-attr&quot;
+         data-height=&quot;50&quot;
+         data-width=&quot;400&quot;
+         data-background-color=&quot;#eee&quot;
+         data-bar-color=&quot;#ff9900&quot;
+         data-label=&quot;Made with HTML5 data attributes&quot;
+         data-current=&quot;25&quot;
+         data-total=&quot;100&quot;&gt;
+    &lt;/div&gt;
+    </pre>
+
+    <pre class="code">
+    $('.easybars-html5').easyBars();
+    </pre>
+  </section>
 </body>
 </html>
