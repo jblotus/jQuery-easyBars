@@ -40,13 +40,17 @@
           width           : $el.width(),
           backgroundColor : $el.css('background-color'),
           barColor        : '#50A6C2',
-          labelColor      : $el.css('color')
+          barDirection    : 'lr',
+          labelColor      : $el.css('color'),
         }, data);
 
 
-        //calculate the width for the inner bar
+        //calculate the dimensions for the inner bar
         options.barScale = options.current / options.total;
         options.barWidth = Math.round(options.width * (options.barScale), 0 , 2);
+
+        //calc height for vertical
+        options.barHeight = Math.round(options.height * (options.barScale), 0 , 2);
 
         //calculate percentage based options hashes
         $.each(options, function(ii, vv) {
@@ -67,14 +71,45 @@
             'background-color' : options.backgroundColor
           });
 
-          var $inner_bar  = $('<div>').attr('class', 'inner-bar').css({
-            'width'  :  options.barWidth,
-            'height' :  options.height,
+          var $innerBar  = $('<div>').attr('class', 'inner-bar').css({
             'background-color': options.barColor,
             'position' : 'absolute'
           });
 
-          var $inner_text = $('<div>').attr('class', 'inner-text');
+          switch(true) {
+            case (options.barDirection === 'rl'):
+              $innerBar.css({
+                'top' : 0,
+                'right' : 0,
+                'width'  :  options.barWidth,
+                'height' :  options.height
+              });
+              break;
+            case (options.barDirection === 'tb'):
+              $innerBar.css({
+                'width'  : options.width,
+                'height' : options.barHeight
+              });
+              break;
+            case (options.barDirection === 'bt'):
+              $innerBar.css({
+                'width'  : options.width,
+                'height' : options.barHeight,
+                'left'   : 0,
+                'bottom' : 0
+              });
+              break;
+            default:
+              $innerBar.css({
+                'top' : 0,
+                'left' : 0,
+                'width'  :  options.barWidth,
+                'height' :  options.height
+              });
+              break;
+          }
+
+          var $innerText = $('<div>').attr('class', 'inner-text');
 
           /**
            * If we don't specify a label, just use the contents of the initial element
@@ -97,14 +132,14 @@
             'vertical-align' : 'middle'
           });
 
-          $inner_text.append($label).css({
+          $innerText.append($label).css({
             'position' : 'absolute',
             'width'  :  options.width,
             'height' :  options.height,
             'line-height' : options.height + 'px' //support centered text label
           });
 
-          $container.append($inner_bar.append($inner_text));
+          $container.append($innerBar).append($innerText);
           $el.replaceWith($container);
         }
       });
