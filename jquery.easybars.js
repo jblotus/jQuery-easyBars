@@ -41,7 +41,8 @@
           backgroundColor : $el.css('background-color'),
           barColor        : '#50A6C2',
           barDirection    : 'lr',
-          labelColor      : $el.css('color')
+          labelColor      : '#FFF',
+          labelColorOuter : '#000'
         }, data);
 
 
@@ -68,12 +69,15 @@
             'position' : 'relative',
             'margin': '5px auto',
             'text-align': 'center',
+            'overflow'  : 'hidden',
             'background-color' : options.backgroundColor
           });
 
           var $innerBar  = $('<div>').attr('class', 'inner-bar').css({
             'background-color': options.barColor,
-            'position' : 'absolute'
+            'position' : 'absolute',
+            'overflow' : 'hidden',
+            'z-index'  : '9999'
           });
 
           switch(true) {
@@ -136,14 +140,33 @@
 
           $innerText.append($label).css({
             'position' : 'absolute',
-            'top' : 0,
-            'left' : 0,
             'width'  :  options.width,
             'height' :  options.height,
             'line-height' : options.height + 'px' //support centered text label
           });
 
-          $container.append($innerBar).append($innerText);
+          //inner text needs to inherit absolute position from parent
+          $innerText.css('top', $innerBar.css('top'));
+          $innerText.css('right', $innerBar.css('right'));
+          $innerText.css('bottom', $innerBar.css('bottom'));
+          $innerText.css('left', $innerBar.css('left'));
+
+          //the bar portion of the label
+          $innerBar.append($innerText);
+
+          //attach the bar w/ label to the outer bar
+          $container.append($innerBar);
+
+          //clone the label and apply it outside of the innre bar
+          var $clone = $innerText.clone();
+          $clone.find('.label').css('color', options.labelColorOuter);
+
+          $clone.appendTo($container);
+
+          //$container.append($innerBar);
+
+          //$container.append($innerText);
+
           $el.replaceWith($container);
         }
       });
