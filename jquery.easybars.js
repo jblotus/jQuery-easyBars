@@ -41,7 +41,7 @@
           backgroundColor : $el.css('background-color'),
           barColor        : '#50A6C2',
           barDirection    : 'lr',
-          labelColor      : $el.css('color'),
+          labelColor      : $el.css('color')
         }, data);
 
 
