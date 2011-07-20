@@ -87,6 +87,8 @@
               break;
             case (options.barDirection === 'tb'):
               $innerBar.css({
+                'top' : 0,
+                'left' : 0,
                 'width'  : options.width,
                 'height' : options.barHeight
               });
@@ -134,6 +136,8 @@
 
           $innerText.append($label).css({
             'position' : 'absolute',
+            'top' : 0,
+            'left' : 0,
             'width'  :  options.width,
             'height' :  options.height,
             'line-height' : options.height + 'px' //support centered text label
