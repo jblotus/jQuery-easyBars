@@ -11,7 +11,7 @@
       //this will allow us to take return different values based on a percentage hash
       var getAttrFromPercentageObject = function(percentage, obj) {
 
-        if (percentage && obj) {
+        if (typeof percentage === 'number' && obj) {
           var lastValid;
 
           for (i = 0; i < 101; i++) {
@@ -25,6 +25,10 @@
             }
           }
         }
+      };
+
+      var parseColor = function(v) {
+
       };
 
       return this.each(function(i, e) {
