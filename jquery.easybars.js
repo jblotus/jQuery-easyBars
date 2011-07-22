@@ -81,7 +81,7 @@
             'background-color': options.barColor,
             'position' : 'absolute',
             'overflow' : 'hidden',
-            'z-index'  : '9999'
+            'z-index'  : '1'
           });
 
           switch(true) {
