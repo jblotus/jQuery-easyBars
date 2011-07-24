@@ -3,7 +3,7 @@ h1. easyBars, a super simple jQuery progress bar plugin
 "Click to view jQuery easyBars Demo":http://jblotus.github.com/jQuery-easyBars/demo/demo.html
 
 h2. Project Highlights:
-* Easy to configure progress bars
+* Easy to configure progress bars (Vertical and Horizontal)
 * Use HTML5 data attributes to supply progress bar parameters
 * Words in Microsoft Internet Explorer 7+
 
