@@ -1,5 +1,7 @@
 h1. easyBars, a super simple jQuery progress bar plugin
 
+Demo @ http://jblotus.github.com/jQuery-easyBars/demo/demo.html
+
 h2. Project Highlights:
 * Easy to configure progress bars
 * Use HTML5 data attributes to supply progress bar parameters
