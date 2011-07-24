@@ -55,10 +55,7 @@
             }
           });
 
-
           self = $.extend(self, options);
-
-
           self.drawBars();
         },
 
@@ -86,56 +83,8 @@
 
           if (self.current !== 'NaN' && self.total !== 'NaN') {
 
-            var $container = $('<div>').attr('class', 'easybars').css({
-              'height': self.height,
-              'width': self.width,
-              'border' : '1px solid #ccc',
-              'position' : 'relative',
-              'margin': '5px auto',
-              'text-align': 'center',
-              'overflow'  : 'hidden',
-              'background-color' : self.backgroundColor
-            });
-
-            var $innerBar  = $('<div>').attr('class', 'inner-bar').css({
-              'background-color': self.barColor,
-              'position' : 'absolute',
-              'overflow' : 'hidden',
-              'z-index'  : '1'
-            });
-
-            switch(true) {
-              case (self.barDirection === 'rl'):
-                $innerBar.css({
-                  'top' : 0,
-                  'right' : 0,
-                  'width'  :  self.barWidth,
-                  'height' :  self.height
-                });
-                break;
-              case (self.barDirection === 'tb'):
-                $innerBar.css({
-                  'width'  : self.width,
-                  'height' : self.barHeight
-                });
-                break;
-              case (self.barDirection === 'bt'):
-                $innerBar.css({
-                  'width'  : self.width,
-                  'height' : self.barHeight,
-                  'left'   : 0,
-                  'bottom' : 0
-                });
-                break;
-              default:
-                $innerBar.css({
-                  'top' : 0,
-                  'left' : 0,
-                  'width'  :  self.barWidth,
-                  'height' :  self.height
-                });
-                break;
-            }
+            var $container = self._buildContainer();
+            var $innerBar  = self._buildInnerBar();
 
             var $innerText = $('<div>').attr('class', 'inner-text');
             /**
@@ -186,7 +135,70 @@
 
             self.$el.replaceWith($container);
           }
-        }
+        },
+
+        _buildContainer: function() {
+          var self = this;
+
+          return $('<div>').attr('class', 'easybars').css({
+            'height': self.height,
+            'width': self.width,
+            'border' : '1px solid #ccc',
+            'position' : 'relative',
+            'margin': '5px auto',
+            'text-align': 'center',
+            'overflow'  : 'hidden',
+            'background-color' : self.backgroundColor
+          });
+
+        },
+
+        _buildInnerBar: function() {
+          var self = this;
+
+          var $innerBar  = $('<div>').attr('class', 'inner-bar').css({
+            'background-color': self.barColor,
+            'position' : 'absolute',
+            'overflow' : 'hidden',
+            'z-index'  : '1'
+          });
+
+          switch(true) {
+            case (self.barDirection === 'rl'):
+              $innerBar.css({
+                'top' : 0,
+                'right' : 0,
+                'width'  :  self.barWidth,
+                'height' :  self.height
+              });
+              break;
+            case (self.barDirection === 'tb'):
+              $innerBar.css({
+                'width'  : self.width,
+                'height' : self.barHeight
+              });
+              break;
+            case (self.barDirection === 'bt'):
+              $innerBar.css({
+                'width'  : self.width,
+                'height' : self.barHeight,
+                'left'   : 0,
+                'bottom' : 0
+              });
+              break;
+            default:
+              $innerBar.css({
+                'top' : 0,
+                'left' : 0,
+                'width'  :  self.barWidth,
+                'height' :  self.height
+              });
+              break;
+          }
+
+          return $innerBar;
+        },
+
       };
 
       return this.each(function() {
