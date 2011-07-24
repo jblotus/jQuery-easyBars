@@ -16,6 +16,10 @@
       easyBars.prototype = {
 
         $el             : null,
+        $container      : null,
+        $innerBar       : null,
+        $innerText      : null,
+        $label          : null,
         current         : null,
         total           : null,
         height          : null,
@@ -83,64 +87,30 @@
 
           if (self.current !== 'NaN' && self.total !== 'NaN') {
 
-            var $container = self._buildContainer();
-            var $innerBar  = self._buildInnerBar();
+            self._buildContainer();
+            self._buildInnerBar();
+            self._buildLabel();
+            self._buildInnerText();
 
-            var $innerText = $('<div>').attr('class', 'inner-text');
-            /**
-             * If we don't specify a label, just use the contents of the initial element
-             */
-            //use supplied HTML5 data-label or supplied { 'label' } value
-            if (self.label) {
-              $label = $('<span>').attr('class', 'label').text(self.label);
-            } else {
-              //fall back to an element with the class label inside the parent
-              $label = self.$el.children('.label');
-
-              if (!$label.length) {
-                //when in doubt fall back to all child elements
-                $label = self.$el.children();
-              }
-            }
-
-            $label.css({
-              'color'  :  self.labelColor,
-              'vertical-align' : 'middle'
-            });
-
-            $innerText.append($label).css({
-              'position' : 'absolute',
-              'width'  :  self.width,
-              'height' :  self.height,
-              'line-height' : self.height + 'px' //support centered text label
-            });
-
-            //inner text needs to inherit absolute position from parent
-            $innerText.css('top', $innerBar.css('top'));
-            $innerText.css('right', $innerBar.css('right'));
-            $innerText.css('bottom', $innerBar.css('bottom'));
-            $innerText.css('left', $innerBar.css('left'));
-
-          //the bar portion of the label
-            $innerBar.append($innerText);
+            //the bar portion of the label
+            self.$innerBar.append(self.$innerText);
 
             //attach the bar w/ label to the outer bar
-            $container.append($innerBar);
+            self.$container.append(self.$innerBar);
 
-            //clone the label and apply it outside of the innre bar
-            var $clone = $innerText.clone();
+            //clone the label and apply it outside of the inner bar
+            var $clone = self.$innerText.clone();
             $clone.find('.label').css('color', self.labelColorOuter);
 
-            $clone.appendTo($container);
+            $clone.appendTo(self.$container);
 
-            self.$el.replaceWith($container);
+            self.$el.replaceWith(self.$container);
           }
         },
 
         _buildContainer: function() {
           var self = this;
-
-          return $('<div>').attr('class', 'easybars').css({
+          self.$container = $('<div>').attr('class', 'easybars').css({
             'height': self.height,
             'width': self.width,
             'border' : '1px solid #ccc',
@@ -156,7 +126,7 @@
         _buildInnerBar: function() {
           var self = this;
 
-          var $innerBar  = $('<div>').attr('class', 'inner-bar').css({
+          self.$innerBar  = $('<div>').attr('class', 'inner-bar').css({
             'background-color': self.barColor,
             'position' : 'absolute',
             'overflow' : 'hidden',
@@ -165,7 +135,7 @@
 
           switch(true) {
             case (self.barDirection === 'rl'):
-              $innerBar.css({
+              self.$innerBar.css({
                 'top' : 0,
                 'right' : 0,
                 'width'  :  self.barWidth,
@@ -173,13 +143,13 @@
               });
               break;
             case (self.barDirection === 'tb'):
-              $innerBar.css({
+              self.$innerBar.css({
                 'width'  : self.width,
                 'height' : self.barHeight
               });
               break;
             case (self.barDirection === 'bt'):
-              $innerBar.css({
+              self.$innerBar.css({
                 'width'  : self.width,
                 'height' : self.barHeight,
                 'left'   : 0,
@@ -187,7 +157,7 @@
               });
               break;
             default:
-              $innerBar.css({
+              self.$innerBar.css({
                 'top' : 0,
                 'left' : 0,
                 'width'  :  self.barWidth,
@@ -195,8 +165,54 @@
               });
               break;
           }
+        },
 
-          return $innerBar;
+        _buildLabel: function() {
+          var self = this;
+
+          /**
+           * If we don't specify a label, just use the contents of the initial element
+           */
+          //use supplied HTML5 data-label or supplied { 'label' } value
+          if (self.label) {
+            self.$label = $('<span>').attr('class', 'label').text(self.label);
+          } else {
+            //fall back to an element with the class label inside the parent
+            self.$label = self.$el.children('.label');
+
+            if (!self.$label.length) {
+              //when in doubt fall back to all child elements
+              self.$label = self.$el.children();
+            }
+          }
+
+          self.$label.css({
+            'color'  :  self.labelColor,
+            'vertical-align' : 'middle'
+          });
+        },
+
+        _buildInnerText: function() {
+          var self = this;
+
+          self.$innerText = $('<div>').attr('class', 'inner-text');
+
+          if (!self.$label || !self.$innerBar) {
+            return;
+          }
+
+          self.$innerText.append(self.$label).css({
+            'position' : 'absolute',
+            'width'  :  self.width,
+            'height' :  self.height,
+            'line-height' : self.height + 'px' //support centered text label
+          });
+
+          //inner text needs to inherit absolute position from parent
+          self.$innerText.css('top', self.$innerBar.css('top'));
+          self.$innerText.css('right', self.$innerBar.css('right'));
+          self.$innerText.css('bottom', self.$innerBar.css('bottom'));
+          self.$innerText.css('left', self.$innerBar.css('left'));
         }
 
       };
