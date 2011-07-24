@@ -37,7 +37,8 @@
             backgroundColor : $el.css('background-color'),
             barColor        : '#50A6C2',
             barDirection    : 'lr',
-            labelColor      : $el.css('color')
+            labelColor      : '#FFF',
+            labelColorOuter : '#000'
           }, options);
 
           //calculate the dimensions for the inner bar
@@ -64,7 +65,7 @@
         //this will allow us to take return different values based on a percentage hash
         getAttrFromPercentageObject : function(percentage, obj) {
 
-          if (percentage && obj) {
+          if (typeof percentage === 'number' && obj) {
             var lastValid;
 
             for (i = 0; i < 101; i++) {
@@ -92,12 +93,15 @@
               'position' : 'relative',
               'margin': '5px auto',
               'text-align': 'center',
+              'overflow'  : 'hidden',
               'background-color' : self.backgroundColor
             });
 
             var $innerBar  = $('<div>').attr('class', 'inner-bar').css({
               'background-color': self.barColor,
-              'position' : 'absolute'
+              'position' : 'absolute',
+              'overflow' : 'hidden',
+              'z-index'  : '1'
             });
 
             switch(true) {
@@ -162,7 +166,24 @@
               'line-height' : self.height + 'px' //support centered text label
             });
 
-            $container.append($innerBar).append($innerText);
+            //inner text needs to inherit absolute position from parent
+            $innerText.css('top', $innerBar.css('top'));
+            $innerText.css('right', $innerBar.css('right'));
+            $innerText.css('bottom', $innerBar.css('bottom'));
+            $innerText.css('left', $innerBar.css('left'));
+
+            //the bar portion of the label
+            $innerBar.append($innerText);
+
+            //attach the bar w/ label to the outer bar
+            $container.append($innerBar);
+
+            //clone the label and apply it outside of the innre bar
+            var $clone = $innerText.clone();
+            $clone.find('.label').css('color', self.labelColorOuter);
+
+            $clone.appendTo($container);
+
             self.$el.replaceWith($container);
           }
         }
