@@ -1,0 +1,9 @@
+h1. easyBars, a super simple jQuery progress bar plugin
+
+h2. Project Highlights:
+* Easy to configure progress bars
+* Use HTML5 data attributes to supply progress bar parameters
+
+h2. Project Roadmap:
+* Animation
+* Callbacks
