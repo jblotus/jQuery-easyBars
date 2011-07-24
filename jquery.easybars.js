@@ -197,7 +197,7 @@
           }
 
           return $innerBar;
-        },
+        }
 
       };
 
