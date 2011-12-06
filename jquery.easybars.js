@@ -46,11 +46,11 @@
           }, options);
 
           //calculate the dimensions for the inner bar
-          options.barScale = options.current / options.total;
-          options.barWidth = Math.round(options.width * (options.barScale), 0 , 2);
+          options.barScale = options.current / options.total || 0;
+          options.barWidth = Math.round(options.width * (options.barScale), 0 , 2) || 0;
 
           //calc height for vertical
-          options.barHeight = Math.round(options.height * (options.barScale), 0 , 2);
+          options.barHeight = Math.round(options.height * (options.barScale), 0 , 2) || 0;
 
           //calculate percentage based options hashes
           $.each(options, function(ii, vv) {
